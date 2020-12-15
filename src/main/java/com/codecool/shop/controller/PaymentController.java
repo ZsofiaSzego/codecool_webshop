@@ -9,6 +9,8 @@ import com.codecool.shop.dao.implementation.PaymentDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Payment;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -22,6 +24,9 @@ import java.util.Map;
 
 @WebServlet(urlPatterns = {"/payment"})
 public class PaymentController extends HttpServlet{
+
+    private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
@@ -50,8 +55,10 @@ public class PaymentController extends HttpServlet{
 
         if (newPayment.allFieldsValid()){
             paymentDataStore.add(newPayment);
+            logger.info("Payment (id:{}) initialized", newPayment.getId());
                     resp.sendRedirect(req.getContextPath() + "/redirected");
         } else {
+            logger.info("Failed payment(Invalid input(s))");
             engine.process("product/payment.html", context, resp.getWriter());
         }
     }
