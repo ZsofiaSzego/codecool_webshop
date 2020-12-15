@@ -12,13 +12,20 @@ import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
 
 @WebListener
 public class Initializer implements ServletContextListener {
+
+    private static final Logger logger = LoggerFactory.getLogger(Initializer.class);
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -26,6 +33,7 @@ public class Initializer implements ServletContextListener {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         OrderDao orderDataStore = OrderDaoMem.getInstance();
+
 
         //setting up a new supplier
         Supplier amazon = new Supplier("Amazon", "Digital content and services");
@@ -48,6 +56,6 @@ public class Initializer implements ServletContextListener {
 
         Cart cart = new Cart();
         productDataStore.setCart(cart);
-
+        logger.info("Context initialized");
     }
 }
