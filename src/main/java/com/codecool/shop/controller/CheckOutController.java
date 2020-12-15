@@ -9,6 +9,8 @@ import com.codecool.shop.model.Address;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Order;
 import ognl.enhance.OrderedReturn;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -24,6 +26,8 @@ import java.util.Map;
 
 @WebServlet(urlPatterns = {"/checkout"})
 public class CheckOutController extends HttpServlet {
+
+    private static final Logger logger = LoggerFactory.getLogger(CheckOutController.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -52,9 +56,11 @@ public class CheckOutController extends HttpServlet {
 //            RequestDispatcher dispatcher = getServletContext()
 //                    .getRequestDispatcher("/payment");
 //            dispatcher.forward(req, resp);
+            logger.info("Added a new order on id {}" , newOrder.getId());
             resp.sendRedirect(req.getContextPath() + "/payment");
 
         } else {
+            logger.info("Failed to add a new order(one or more inputs invalid)");
             engine.process("product/checkout.html", context, resp.getWriter());
         }
     }
