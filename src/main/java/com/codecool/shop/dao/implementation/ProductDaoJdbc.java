@@ -8,6 +8,7 @@ import com.codecool.shop.model.Supplier;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoJdbc implements ProductDao {
@@ -63,7 +64,23 @@ public class ProductDaoJdbc implements ProductDao {
 
     @Override
     public List<Product> getAll() {
-        return null;
+        try (Connection connection = dataSource.getConnection()){
+            String sql = "SELECT id, name, default_price, currency, description, product_category, supplier FROM products";
+            ResultSet resultSet = connection.createStatement().executeQuery(sql);
+            List<Product> resultList = new ArrayList<>();
+
+            while (resultSet.next()){
+                ProductCategoryDaoJdbc productCategoryDaoJdbc = new ProductCategoryDaoJdbc(dataSource);
+                SupplierDaoJdbc supplierDaoJdbc = new SupplierDaoJdbc(dataSource);
+                Product product = new Product(resultSet.getString(2), resultSet.getFloat(3),
+                        resultSet.getString(4), resultSet.getString(5),
+                        productCategoryDaoJdbc.find(resultSet.getInt(6)),
+                        supplierDaoJdbc.find(resultSet.getInt(7)));
+                product.setId(resultSet.getInt(1));
+                resultList.add(product);
+            }
+            return resultList;
+        } catch (SQLException e){throw new RuntimeException(e);}
     }
 
     @Override
