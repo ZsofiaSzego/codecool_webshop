@@ -7,6 +7,11 @@ import java.sql.SQLException;
 
 public class DatabaseManager {
 
+    public DataSource setup() throws SQLException {
+        return connect();
+
+    }
+
     private DataSource connect() throws SQLException {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
         String dbname = System.getenv("PSQL_DB_NAME");
