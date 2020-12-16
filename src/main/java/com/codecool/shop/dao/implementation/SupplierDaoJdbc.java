@@ -31,15 +31,12 @@ public class SupplierDaoJdbc implements SupplierDao {
 
     @Override
     public Supplier find(int id) {
-
         try (Connection connection = dataSource.getConnection()){
-            String sql = "SELECT id, name, description FROM products WHERE id = ?";
+            String sql = "SELECT id, name, description FROM supplier WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (! resultSet.next() ){return null;}
-            SupplierDaoJdbc supplierDaoJdbc = new SupplierDaoJdbc(dataSource);
-
             Supplier supplier = new Supplier(resultSet.getString(2), resultSet.getString(3));
             supplier.setId(resultSet.getInt(1));
             return supplier;
@@ -64,7 +61,6 @@ public class SupplierDaoJdbc implements SupplierDao {
             List<Supplier> resultList = new ArrayList<>();
 
             while (resultSet.next()){
-                SupplierDaoJdbc supplierDaoJdbc = new SupplierDaoJdbc(dataSource);
                 Supplier supplier = new Supplier(resultSet.getString(2), resultSet.getString(3));
                 supplier.setId(resultSet.getInt(1));
                 resultList.add(supplier);
