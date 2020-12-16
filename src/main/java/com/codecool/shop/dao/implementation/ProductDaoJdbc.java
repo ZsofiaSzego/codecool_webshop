@@ -13,6 +13,7 @@ import java.util.List;
 
 public class ProductDaoJdbc implements ProductDao {
 
+    private Cart cart;
     private DataSource dataSource;
 
     public ProductDaoJdbc(DataSource dataSource){this.dataSource = dataSource;}
@@ -62,49 +63,74 @@ public class ProductDaoJdbc implements ProductDao {
         } catch (SQLException e){throw new RuntimeException(e);}
     }
 
+    public List<Product> getProductList(ResultSet resultSet) throws SQLException {
+        List<Product> resultList = new ArrayList<>();
+        while (resultSet.next()){
+            ProductCategoryDaoJdbc productCategoryDaoJdbc = new ProductCategoryDaoJdbc(dataSource);
+            SupplierDaoJdbc supplierDaoJdbc = new SupplierDaoJdbc(dataSource);
+            Product product = new Product(resultSet.getString(2), resultSet.getFloat(3),
+                    resultSet.getString(4), resultSet.getString(5),
+                    productCategoryDaoJdbc.find(resultSet.getInt(6)),
+                    supplierDaoJdbc.find(resultSet.getInt(7)));
+            product.setId(resultSet.getInt(1));
+            resultList.add(product);
+        }
+        return resultList;
+    }
+
     @Override
     public List<Product> getAll() {
         try (Connection connection = dataSource.getConnection()){
             String sql = "SELECT id, name, default_price, currency, description, product_category, supplier FROM products";
             ResultSet resultSet = connection.createStatement().executeQuery(sql);
-            List<Product> resultList = new ArrayList<>();
-
-            while (resultSet.next()){
-                ProductCategoryDaoJdbc productCategoryDaoJdbc = new ProductCategoryDaoJdbc(dataSource);
-                SupplierDaoJdbc supplierDaoJdbc = new SupplierDaoJdbc(dataSource);
-                Product product = new Product(resultSet.getString(2), resultSet.getFloat(3),
-                        resultSet.getString(4), resultSet.getString(5),
-                        productCategoryDaoJdbc.find(resultSet.getInt(6)),
-                        supplierDaoJdbc.find(resultSet.getInt(7)));
-                product.setId(resultSet.getInt(1));
-                resultList.add(product);
-            }
-            return resultList;
+            return getProductList(resultSet);
         } catch (SQLException e){throw new RuntimeException(e);}
     }
 
     @Override
     public List<Product> getBy(Supplier supplier) {
-        return null;
+        try (Connection connection = dataSource.getConnection()){
+            String sql = "SELECT id, name, default_price, currency, description, product_category, supplier " +
+                    "FROM products WHERE supplier=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, supplier.getId());
+            ResultSet resultSet = statement.executeQuery();
+            return getProductList(resultSet);
+        } catch (SQLException e){throw new RuntimeException(e);}
     }
 
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
-        return null;
+        try (Connection connection = dataSource.getConnection()){
+            String sql = "SELECT id, name, default_price, currency, description, product_category, supplier " +
+                    "FROM products WHERE product_category=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, productCategory.getId());
+            ResultSet resultSet = statement.executeQuery();
+            return getProductList(resultSet);
+        } catch (SQLException e){throw new RuntimeException(e);}
     }
 
     @Override
     public List<Product> getBy(ProductCategory productCategory, Supplier supplier) {
-        return null;
+        try (Connection connection = dataSource.getConnection()){
+            String sql = "SELECT id, name, default_price, currency, description, product_category, supplier " +
+                    "FROM products WHERE product_category=? AND supplier=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, productCategory.getId());
+            statement.setInt(2, supplier.getId());
+            ResultSet resultSet = statement.executeQuery();
+            return getProductList(resultSet);
+        } catch (SQLException e){throw new RuntimeException(e);}
     }
 
     @Override
     public Cart getCart() {
-        return null;
+        return cart;
     }
 
     @Override
     public void setCart(Cart cart) {
-
+        this.cart = cart;
     }
 }
