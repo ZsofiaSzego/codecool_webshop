@@ -25,7 +25,7 @@ import java.util.Enumeration;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"/checkout"})
-public class CheckOutController extends HttpServlet {
+public class CheckOutController extends Controller {
 
     private static final Logger logger = LoggerFactory.getLogger(CheckOutController.class);
 
@@ -41,8 +41,6 @@ public class CheckOutController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        OrderDao orderDataStore = OrderDaoMem.getInstance();
-        ProductDao productDataStore = ProductDaoMem.getInstance();
         Cart cart = productDataStore.getCart();
 
         Map<String, String[]> paramMap = req.getParameterMap();
@@ -53,9 +51,6 @@ public class CheckOutController extends HttpServlet {
         context.setVariable("order", newOrder);
         if (newOrder.allFieldsValid()) {
             orderDataStore.add(newOrder);
-//            RequestDispatcher dispatcher = getServletContext()
-//                    .getRequestDispatcher("/payment");
-//            dispatcher.forward(req, resp);
             logger.info("Added a new order on id {}" , newOrder.getId());
             resp.sendRedirect(req.getContextPath() + "/payment");
 

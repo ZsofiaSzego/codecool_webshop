@@ -5,6 +5,7 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -23,10 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"/"})
-public class ProductController extends HttpServlet {
-    ProductDao productDataStore;
-    ProductCategoryDao productCategoryDataStore;
-    SupplierDao supplierDataStore;
+public class ProductController extends Controller {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,6 +38,8 @@ public class ProductController extends HttpServlet {
             productDataStore = new ProductDaoJdbc(dataSource);
             productCategoryDataStore = new ProductCategoryDaoJdbc(dataSource);
             supplierDataStore = new SupplierDaoJdbc(dataSource);
+            Cart cart = new Cart();
+            productDataStore.setCart(cart);
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }

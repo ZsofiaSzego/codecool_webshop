@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ProductDaoJdbc implements ProductDao {
 
-    private Cart cart;
+    private static Cart cart;
     private DataSource dataSource;
 
     public ProductDaoJdbc(DataSource dataSource){this.dataSource = dataSource;}

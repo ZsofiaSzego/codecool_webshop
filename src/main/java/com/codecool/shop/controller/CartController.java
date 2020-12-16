@@ -20,12 +20,11 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/cart"})
-public class CartController  extends HttpServlet {
+public class CartController  extends Controller {
     private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
         Cart cart = productDataStore.getCart();
         if (req.getParameter("addid") != null){
         int id = Integer.parseInt(req.getParameter("addid"));

@@ -3,24 +3,35 @@ package com.codecool.shop.dao.implementation;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class DatabaseManager {
 
-    public DataSource setup() throws SQLException {
+    public DataSource setup() throws SQLException, IOException {
         return connect();
 
     }
 
-    private DataSource connect() throws SQLException {
-        PGSimpleDataSource dataSource = new PGSimpleDataSource();
-        String dbname = System.getenv("PSQL_DB_NAME");
-        String user = System.getenv("PSQL_USER_NAME");
-        String password = System.getenv("PSQL_PASSWORD");
+    private DataSource connect() throws SQLException, IOException {
+        Properties properties = new Properties();
+        String propFileName = "connection.properties";
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
 
-        dataSource.setDatabaseName(dbname);
-        dataSource.setUser(user);
-        dataSource.setPassword(password);
+        if (inputStream != null) {
+            properties.load(inputStream);
+        } else {
+            throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
+        }
+
+        PGSimpleDataSource dataSource = new PGSimpleDataSource();
+
+        dataSource.setDatabaseName(properties.getProperty("database"));
+        dataSource.setUser(properties.getProperty("user"));
+        dataSource.setPassword(properties.getProperty("password"));
 
         System.out.println("Trying to connect");
         dataSource.getConnection().close();

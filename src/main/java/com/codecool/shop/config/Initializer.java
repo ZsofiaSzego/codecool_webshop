@@ -56,19 +56,5 @@ public class Initializer implements ServletContextListener {
 //        productDataStore.setCart(cart);
 //        logger.info("Context initialized");
 
-
-        DatabaseManager databaseManager = new DatabaseManager();
-        try {
-            DataSource dataSource = databaseManager.setup();
-            ProductDaoJdbc productDaoJdbc = new ProductDaoJdbc(dataSource);
-            ProductCategoryDaoJdbc productCategoryDaoJdbc = new ProductCategoryDaoJdbc(dataSource);
-            SupplierDaoJdbc supplierDaoJdbc = new SupplierDaoJdbc(dataSource);
-            Cart cart = new Cart();
-            productDaoJdbc.setCart(cart);
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
-        }
-
-
     }
 }
