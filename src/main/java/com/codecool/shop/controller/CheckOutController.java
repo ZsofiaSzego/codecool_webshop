@@ -30,9 +30,6 @@ public class CheckOutController extends Controller {
 
     private static final Logger logger = LoggerFactory.getLogger(CheckOutController.class);
 
-    public CheckOutController(DataSource dataSource) {
-        super(dataSource);
-    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

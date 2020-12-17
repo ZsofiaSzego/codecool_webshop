@@ -16,15 +16,8 @@ public class Controller extends HttpServlet {
     protected static OrderDao orderDataStore;
     protected static PaymentDao paymentDataStore;
 
-    public Controller(DataSource dataSource) {
-        setProductDataStore(new ProductDaoJdbc(dataSource));
-        setProductCategoryDataStore(new ProductCategoryDaoJdbc(dataSource));
-        setSupplierDataStore(new SupplierDaoJdbc(dataSource));
-        //setPaymentDataStore(new PaymentDaoJdbc(dataSource));
-        //setOrderDataStore(new OrderDaoJdbc(dataSource));
+    public Controller() {
     }
-
-
 
     public static ProductDao getProductDataStore() {
         return productDataStore;

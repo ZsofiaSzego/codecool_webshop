@@ -33,9 +33,12 @@ public class Initializer implements ServletContextListener {
         DatabaseManager databaseManager = new DatabaseManager();
         try {
             DataSource dataSource = databaseManager.setup();
-            Controller controller = new Controller(dataSource);
+            new Controller();
+            Controller.setProductDataStore(new ProductDaoJdbc(dataSource));
+            Controller.setProductCategoryDataStore(new ProductCategoryDaoJdbc(dataSource));
+            Controller.setSupplierDataStore(new SupplierDaoJdbc(dataSource));
             Cart cart = new Cart();
-            controller.getProductDataStore().setCart(cart);
+            Controller.getProductDataStore().setCart(cart);
         } catch (SQLException | IOException throwable) {
             throwable.printStackTrace();
         }

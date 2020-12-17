@@ -26,10 +26,6 @@ import java.util.Map;
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends Controller {
 
-    public ProductController(DataSource dataSource) {
-        super(dataSource);
-    }
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        productDataStore = ProductDaoMem.getInstance();
@@ -42,7 +38,7 @@ public class ProductController extends Controller {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         List<Product> productList;
-        if (req.getParameter("category") == null || req.getParameter("supplier") == null) {
+        if ((req.getParameter("category") == null && req.getParameter("supplier") == null)) {
             productList = productDataStore.getAll();
         } else {
             int category = Integer.parseInt(req.getParameter("category"));
@@ -50,19 +46,11 @@ public class ProductController extends Controller {
             if (category == 0 && supplier == 0){
                 productList = productDataStore.getAll();
             }
-            if (!(category == 0)) {
-                if (!(supplier == 0)) {
-                    productList = productDataStore.getBy(productCategoryDataStore.find(category), supplierDataStore.find(supplier));
-                } else {
-                    productList = productDataStore.getBy(productCategoryDataStore.find(category));
-                }
+            else if(category == 0){
+                productList = productDataStore.getBy(supplierDataStore.find(supplier));
             }
-            else {
-                if (!(category == 0)) {
-                    productList = productDataStore.getBy(productCategoryDataStore.find(category), supplierDataStore.find(supplier));
-                } else {
-                    productList = productDataStore.getBy(supplierDataStore.find(supplier));
-                }
+            else{
+                productList = productDataStore.getBy(productCategoryDataStore.find(category));
             }
         }
         context.setVariable("products", productList);
