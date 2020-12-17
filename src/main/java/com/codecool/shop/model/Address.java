@@ -1,6 +1,7 @@
 package com.codecool.shop.model;
 
 public class Address {
+    int id;
     String country;
     String city;
     int zipCode;
@@ -11,6 +12,14 @@ public class Address {
         setCity(city);
         setZipCode(zipCode);
         setAddress(address);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCountry() {
@@ -53,4 +62,5 @@ public class Address {
     public boolean allFieldsFilled(){
         return country != null && city != null && zipCode != 0 && address != null;
     }
+
 }

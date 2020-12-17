@@ -24,6 +24,17 @@ CREATE TABLE public.products (
   product_category integer
 );
 
+DROP TABLE IF EXISTS public.orders;
+CREATE TABLE public.orders (
+ id serial NOT NULL PRIMARY KEY,
+ name varchar,
+ email varchar,
+ phone_number varchar,
+ shipping_address varchar,
+ billing_address varchar,
+ cart integer
+);
+
 ALTER TABLE ONLY public.products
     ADD CONSTRAINT fk_product_category FOREIGN KEY (product_category) REFERENCES public.product_category(id);
 
