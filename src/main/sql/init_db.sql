@@ -30,8 +30,8 @@ CREATE TABLE public.orders (
  name varchar,
  email varchar,
  phone_number varchar,
- shipping_address varchar,
- billing_address varchar,
+ shipping_address integer,
+ billing_address integer,
  cart integer
 );
 
@@ -46,6 +46,22 @@ CREATE TABLE public.payment (
     paypal_user varchar,
     paypal_password varchar
 );
+
+DROP TABLE IF EXISTS public.address;
+CREATE TABLE public.address (
+    id serial NOT NULL PRIMARY KEY,
+    country varchar,
+    city varchar,
+    zipcode integer,
+    address varchar,
+    address_type integer
+);
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT fk_shipping_address FOREIGN KEY (shipping_address) REFERENCES public.address(address_type);
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT fk_billing_address FOREIGN KEY (billing_address) REFERENCES public.address(address_type);
 
 ALTER TABLE ONLY public.products
     ADD CONSTRAINT fk_product_category FOREIGN KEY (product_category) REFERENCES public.product_category(id);
