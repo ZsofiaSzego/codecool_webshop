@@ -35,6 +35,18 @@ CREATE TABLE public.orders (
  cart integer
 );
 
+DROP TABLE IF EXISTS public.payment;
+CREATE TABLE public.payment (
+    id serial NOT NULL PRIMARY KEY,
+    card_type varchar,
+    card_number varchar,
+    expire_year integer,
+    expire_month integer,
+    cvc integer,
+    paypal_user varchar,
+    paypal_password varchar
+);
+
 ALTER TABLE ONLY public.products
     ADD CONSTRAINT fk_product_category FOREIGN KEY (product_category) REFERENCES public.product_category(id);
 
