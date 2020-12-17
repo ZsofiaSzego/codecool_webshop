@@ -15,6 +15,7 @@ public class Controller extends HttpServlet {
     protected static SupplierDao supplierDataStore;
     protected static OrderDao orderDataStore;
     protected static PaymentDao paymentDataStore;
+    protected static AddressDao addressDataStore;
 
     public Controller() {
     }
@@ -57,5 +58,13 @@ public class Controller extends HttpServlet {
 
     public static void setPaymentDataStore(PaymentDao paymentDataStore) {
         Controller.paymentDataStore = paymentDataStore;
+    }
+
+    public static AddressDao getAddressDataStore() {
+        return addressDataStore;
+    }
+
+    public static void setAddressDataStore(AddressDao addressDataStore) {
+        Controller.addressDataStore = addressDataStore;
     }
 }

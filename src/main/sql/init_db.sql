@@ -31,8 +31,7 @@ CREATE TABLE public.orders (
  email varchar,
  phone_number varchar,
  shipping_address integer,
- billing_address integer,
- cart integer
+ billing_address integer
 );
 
 DROP TABLE IF EXISTS public.payment;
@@ -53,15 +52,14 @@ CREATE TABLE public.address (
     country varchar,
     city varchar,
     zipcode integer,
-    address varchar,
-    address_type integer
+    address varchar
 );
 
 ALTER TABLE ONLY public.orders
-    ADD CONSTRAINT fk_shipping_address FOREIGN KEY (shipping_address) REFERENCES public.address(address_type);
+    ADD CONSTRAINT fk_shipping_address FOREIGN KEY (shipping_address) REFERENCES public.address(id);
 
 ALTER TABLE ONLY public.orders
-    ADD CONSTRAINT fk_billing_address FOREIGN KEY (billing_address) REFERENCES public.address(address_type);
+    ADD CONSTRAINT fk_billing_address FOREIGN KEY (billing_address) REFERENCES public.address(id);
 
 ALTER TABLE ONLY public.products
     ADD CONSTRAINT fk_product_category FOREIGN KEY (product_category) REFERENCES public.product_category(id);

@@ -63,4 +63,17 @@ public class Address {
         return country != null && city != null && zipCode != 0 && address != null;
     }
 
+    public boolean equals(Address address){
+        if(this.country.equals(address.country)){
+            if(this.city.equals(address.city)){
+                if(this.zipCode == address.zipCode){
+                    if(this.address.equals(address.address)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 }

@@ -52,6 +52,21 @@ public class CheckOutController extends Controller {
         Order newOrder = new Order(cart, paramMap.get("name")[0], paramMap.get("email")[0], paramMap.get("phone")[0], shippingInfo, billingInfo);
         context.setVariable("order", newOrder);
         if (newOrder.allFieldsValid()) {
+            if(billingInfo.equals(shippingInfo)){
+                if (!addressDataStore.isAlreadyInDb(billingInfo)){
+                    addressDataStore.add(billingInfo);
+                    shippingInfo.setId(billingInfo.getId());
+                    }
+                }
+            else{
+                if (!addressDataStore.isAlreadyInDb(billingInfo)){
+                    addressDataStore.add(newOrder.getBillingAddress());
+                    System.out.println(newOrder.getShippingAddress());
+                }
+                if (!addressDataStore.isAlreadyInDb(shippingInfo)){
+                    addressDataStore.add(newOrder.getShippingAddress());
+                }
+            }
             orderDataStore.add(newOrder);
             logger.info("Added a new order on id {}" , newOrder.getId());
             resp.sendRedirect(req.getContextPath() + "/payment");
