@@ -2,9 +2,11 @@ package com.codecool.shop.dao.implementation;
 
 
 import com.codecool.shop.dao.ProductCategoryDao;
+import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class ProductCategoryDaoMem implements ProductCategoryDao {
@@ -42,6 +44,14 @@ public class ProductCategoryDaoMem implements ProductCategoryDao {
 
     @Override
     public List<ProductCategory> getAll() {
+        return data;
+    }
+
+    public void clearData() {
+        this.data= new ArrayList<>();
+    }
+
+    public List<ProductCategory> getData() {
         return data;
     }
 }
