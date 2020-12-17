@@ -53,6 +53,9 @@ public class ProductController extends Controller {
         } else {
             int category = Integer.parseInt(req.getParameter("category"));
             int supplier = Integer.parseInt(req.getParameter("supplier"));
+            if (category == 0 && supplier == 0){
+                productList = productDataStore.getAll();
+            }
             if (!(category == 0)) {
                 if (!(supplier == 0)) {
                     productList = productDataStore.getBy(productCategoryDataStore.find(category), supplierDataStore.find(supplier));
@@ -60,14 +63,12 @@ public class ProductController extends Controller {
                     productList = productDataStore.getBy(productCategoryDataStore.find(category));
                 }
             }
-            if (!(supplier == 0)) {
+            else {
                 if (!(category == 0)) {
                     productList = productDataStore.getBy(productCategoryDataStore.find(category), supplierDataStore.find(supplier));
                 } else {
                     productList = productDataStore.getBy(supplierDataStore.find(supplier));
                 }
-            } else {
-                productList = productDataStore.getAll();
             }
         }
         context.setVariable("products", productList);
