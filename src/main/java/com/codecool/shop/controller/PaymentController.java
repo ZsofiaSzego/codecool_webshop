@@ -8,6 +8,7 @@ import com.codecool.shop.dao.implementation.OrderDaoMem;
 import com.codecool.shop.dao.implementation.PaymentDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Cart;
+import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Payment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +43,6 @@ public class PaymentController extends Controller{
         Payment newPayment;
         Map<String, String[]> paramMap = req.getParameterMap();
         if (paramMap.get("radiobtn") == null){ engine.process("product/payment.html", context, resp.getWriter()); }
-
         newPayment = new Payment(paramMap.get("radiobtn")[0], paramMap.get("cardnumber")[0], paramMap.get("cardholder")[0],
                 paramMap.get("expm")[0], paramMap.get("expyear")[0] );
         newPayment.setCreditCardCode(paramMap.get("code")[0]);

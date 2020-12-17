@@ -57,14 +57,24 @@ public class CheckOutController extends Controller {
                     addressDataStore.add(billingInfo);
                     shippingInfo.setId(billingInfo.getId());
                     }
+                else {
+                    int id = addressDataStore.find(billingInfo);
+                    billingInfo.setId(id);
+                    shippingInfo.setId(id); }
                 }
-            else{
+            else {
                 if (!addressDataStore.isAlreadyInDb(billingInfo)){
                     addressDataStore.add(newOrder.getBillingAddress());
                     System.out.println(newOrder.getShippingAddress());
+                } else{
+                    int id = addressDataStore.find(billingInfo);
+                    billingInfo.setId(id);
                 }
                 if (!addressDataStore.isAlreadyInDb(shippingInfo)){
                     addressDataStore.add(newOrder.getShippingAddress());
+                } else {
+                    int id = addressDataStore.find(shippingInfo);
+                    shippingInfo.setId(id);
                 }
             }
             orderDataStore.add(newOrder);

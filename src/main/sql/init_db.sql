@@ -24,7 +24,7 @@ CREATE TABLE public.products (
   product_category integer
 );
 
-DROP TABLE IF EXISTS public.orders;
+DROP TABLE IF EXISTS public.orders CASCADE;
 CREATE TABLE public.orders (
  id serial NOT NULL PRIMARY KEY,
  name varchar,
@@ -34,7 +34,7 @@ CREATE TABLE public.orders (
  billing_address integer
 );
 
-DROP TABLE IF EXISTS public.payment;
+DROP TABLE IF EXISTS public.payment CASCADE;
 CREATE TABLE public.payment (
     id serial NOT NULL PRIMARY KEY,
     card_type varchar,
@@ -44,9 +44,10 @@ CREATE TABLE public.payment (
     cvc integer,
     paypal_user varchar,
     paypal_password varchar
+--     order_id integer
 );
 
-DROP TABLE IF EXISTS public.address;
+DROP TABLE IF EXISTS public.address CASCADE ;
 CREATE TABLE public.address (
     id serial NOT NULL PRIMARY KEY,
     country varchar,
@@ -66,6 +67,9 @@ ALTER TABLE ONLY public.products
 
 ALTER TABLE ONLY public.products
     ADD CONSTRAINT fk_supplier FOREIGN KEY (supplier) REFERENCES public.supplier(id);
+
+-- ALTER TABLE ONLY public.payment
+--     ADD CONSTRAINT fk_order_id FOREIGN KEY (order_id) REFERENCES public.orders(id);
 
 INSERT INTO public.supplier (name, description) VALUES ('Amazon', 'Digital content and services');
 INSERT INTO public.supplier (name, description) VALUES ('Lenovo', 'Computers');

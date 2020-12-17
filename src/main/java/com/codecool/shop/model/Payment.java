@@ -17,7 +17,7 @@ public class Payment {
     String cardNumRegx = "^[0-9]{16}$";
     String cardHolderRegx = "^[a-zA-Z ]*$";
     String CVCRegx ="^[0-9]{3}$";
-    String payPalUserNameRegx= "^[\\p{L} .'-]+$";
+    String payPalUserNameRegx= "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
 
 
     public Payment(String cardType, String cardNumber, String cardHolder, String expMonth, String expYear) {
