@@ -2,6 +2,7 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.model.Order;
+import com.codecool.shop.model.ProductCategory;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -15,7 +16,8 @@ public class OrderDaoJdbc implements OrderDao {
     @Override
     public void add(Order order) {
         try (Connection connection = dataSource.getConnection()){
-            String sql = "INSERT INTO orders (name, email, phone_number, shipping_address, billing_address) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO orders (name, email, phone_number, shipping_address, billing_address) " +
+                    "VALUES (?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, order.getName());
             statement.setString(2, order.getEmail());
