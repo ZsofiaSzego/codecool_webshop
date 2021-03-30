@@ -43,4 +43,12 @@ public class SupplierDaoMem implements SupplierDao {
     public List<Supplier> getAll() {
         return data;
     }
+
+    public List<Supplier> getData() {
+        return data;
+    }
+
+    public void clearData(){
+        this.data = new ArrayList<>();
+    }
 }
