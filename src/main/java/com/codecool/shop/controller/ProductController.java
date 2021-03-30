@@ -3,10 +3,9 @@ package com.codecool.shop.controller;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -16,19 +15,28 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.postgresql.ds.PGSimpleDataSource;
+import javax.sql.DataSource;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"/"})
-public class ProductController extends HttpServlet {
+public class ProductController extends Controller {
+
+    public ProductController(DataSource dataSource) {
+        super(dataSource);
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+//        productDataStore = ProductDaoMem.getInstance();
+//        productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+//        supplierDataStore = SupplierDaoMem.getInstance();
+
+
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -39,6 +47,9 @@ public class ProductController extends HttpServlet {
         } else {
             int category = Integer.parseInt(req.getParameter("category"));
             int supplier = Integer.parseInt(req.getParameter("supplier"));
+            if (category == 0 && supplier == 0){
+                productList = productDataStore.getAll();
+            }
             if (!(category == 0)) {
                 if (!(supplier == 0)) {
                     productList = productDataStore.getBy(productCategoryDataStore.find(category), supplierDataStore.find(supplier));
@@ -46,14 +57,12 @@ public class ProductController extends HttpServlet {
                     productList = productDataStore.getBy(productCategoryDataStore.find(category));
                 }
             }
-            if (!(supplier == 0)) {
+            else {
                 if (!(category == 0)) {
                     productList = productDataStore.getBy(productCategoryDataStore.find(category), supplierDataStore.find(supplier));
                 } else {
                     productList = productDataStore.getBy(supplierDataStore.find(supplier));
                 }
-            } else {
-                productList = productDataStore.getAll();
             }
         }
         context.setVariable("products", productList);

@@ -19,13 +19,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"/payment"})
-public class PaymentController extends HttpServlet{
+public class PaymentController extends Controller{
 
     private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
+
+    public PaymentController(DataSource dataSource) {
+        super(dataSource);
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,10 +43,6 @@ public class PaymentController extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        PaymentDao paymentDataStore = PaymentDaoMem.getInstance();
-        OrderDao orderDataStore = OrderDaoMem.getInstance();
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        Cart cart = productDataStore.getCart();
         Payment newPayment;
         Map<String, String[]> paramMap = req.getParameterMap();
         if (paramMap.get("radiobtn") == null){ engine.process("product/payment.html", context, resp.getWriter()); }

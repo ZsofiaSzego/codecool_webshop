@@ -20,14 +20,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"/checkout"})
-public class CheckOutController extends HttpServlet {
+public class CheckOutController extends Controller {
 
     private static final Logger logger = LoggerFactory.getLogger(CheckOutController.class);
+
+    public CheckOutController(DataSource dataSource) {
+        super(dataSource);
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,8 +46,6 @@ public class CheckOutController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        OrderDao orderDataStore = OrderDaoMem.getInstance();
-        ProductDao productDataStore = ProductDaoMem.getInstance();
         Cart cart = productDataStore.getCart();
 
         Map<String, String[]> paramMap = req.getParameterMap();
@@ -53,9 +56,6 @@ public class CheckOutController extends HttpServlet {
         context.setVariable("order", newOrder);
         if (newOrder.allFieldsValid()) {
             orderDataStore.add(newOrder);
-//            RequestDispatcher dispatcher = getServletContext()
-//                    .getRequestDispatcher("/payment");
-//            dispatcher.forward(req, resp);
             logger.info("Added a new order on id {}" , newOrder.getId());
             resp.sendRedirect(req.getContextPath() + "/payment");
 
