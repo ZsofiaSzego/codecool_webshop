@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface AddressDao {
     void add(Address address);
+    int find(Address address);
     Address find(int id);
     void remove(int id);
     boolean isAlreadyInDb(Address address);

@@ -1,0 +1,192 @@
+2020-12-17 14:58:10 INFO  Initializer:48 - Context initialized
+2020-12-17 14:58:27 INFO  CartController:33 - Added a(n) Lenovo IdeaPad Miix 700 (id:2) to cart
+2020-12-17 14:58:37 INFO  CheckOutController:71 - Added a new order on id 1
+2020-12-17 14:58:37 ERROR TemplateEngine:1136 - [THYMELEAF][qtp1330981538-18] Exception processing template "product/payment.html": Exception evaluating OGNL expression: "order.getId()" (template: "product/payment.html" - line 133, col 30)
+org.thymeleaf.exceptions.TemplateProcessingException: Exception evaluating OGNL expression: "order.getId()" (template: "product/payment.html" - line 133, col 30)
+	at org.thymeleaf.standard.expression.OGNLVariableExpressionEvaluator.evaluate(OGNLVariableExpressionEvaluator.java:191)
+	at org.thymeleaf.standard.expression.OGNLVariableExpressionEvaluator.evaluate(OGNLVariableExpressionEvaluator.java:95)
+	at org.thymeleaf.standard.expression.VariableExpression.executeVariableExpression(VariableExpression.java:166)
+	at org.thymeleaf.standard.expression.SimpleExpression.executeSimple(SimpleExpression.java:66)
+	at org.thymeleaf.standard.expression.Expression.execute(Expression.java:109)
+	at org.thymeleaf.standard.expression.Expression.execute(Expression.java:138)
+	at org.thymeleaf.standard.processor.AbstractStandardExpressionAttributeTagProcessor.doProcess(AbstractStandardExpressionAttributeTagProcessor.java:144)
+	at org.thymeleaf.processor.element.AbstractAttributeTagProcessor.doProcess(AbstractAttributeTagProcessor.java:74)
+	at org.thymeleaf.processor.element.AbstractElementTagProcessor.process(AbstractElementTagProcessor.java:95)
+	at org.thymeleaf.util.ProcessorConfigurationUtils$ElementTagProcessorWrapper.process(ProcessorConfigurationUtils.java:633)
+	at org.thymeleaf.engine.ProcessorTemplateHandler.handleStandaloneElement(ProcessorTemplateHandler.java:918)
+	at org.thymeleaf.engine.StandaloneElementTag.beHandled(StandaloneElementTag.java:228)
+	at org.thymeleaf.engine.TemplateModel.process(TemplateModel.java:136)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:661)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1067)
+	at com.codecool.shop.controller.PaymentController.doGet(PaymentController.java:37)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:687)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+	at org.eclipse.jetty.servlet.ServletHolder$NotAsyncServlet.service(ServletHolder.java:1402)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:763)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1631)
+	at org.eclipse.jetty.websocket.server.WebSocketUpgradeFilter.doFilter(WebSocketUpgradeFilter.java:226)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1618)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:549)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:602)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:127)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:235)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:1610)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:233)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1369)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:188)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:489)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1580)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:186)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1284)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.handle(ContextHandlerCollection.java:191)
+	at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:146)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:127)
+	at org.eclipse.jetty.server.Server.handle(Server.java:501)
+	at org.eclipse.jetty.server.HttpChannel.lambda$handle$1(HttpChannel.java:383)
+	at org.eclipse.jetty.server.HttpChannel.dispatch(HttpChannel.java:556)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:375)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:272)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:311)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:103)
+	at org.eclipse.jetty.io.ChannelEndPoint$1.run(ChannelEndPoint.java:104)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:336)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:313)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:171)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:129)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:375)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:806)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:938)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.NullPointerException: target is null for method getId
+	at ognl.OgnlRuntime.callMethod(OgnlRuntime.java:1613)
+	at ognl.ASTMethod.getValueBody(ASTMethod.java:91)
+	at ognl.SimpleNode.evaluateGetValueBody(SimpleNode.java:212)
+	at ognl.SimpleNode.getValue(SimpleNode.java:258)
+	at ognl.ASTChain.getValueBody(ASTChain.java:141)
+	at ognl.SimpleNode.evaluateGetValueBody(SimpleNode.java:212)
+	at ognl.SimpleNode.getValue(SimpleNode.java:258)
+	at ognl.Ognl.getValue(Ognl.java:467)
+	at ognl.Ognl.getValue(Ognl.java:431)
+	at org.thymeleaf.standard.expression.OGNLVariableExpressionEvaluator.executeExpression(OGNLVariableExpressionEvaluator.java:316)
+	at org.thymeleaf.standard.expression.OGNLVariableExpressionEvaluator.evaluate(OGNLVariableExpressionEvaluator.java:170)
+	... 56 more
+2020-12-17 15:10:36 ERROR TemplateEngine:1136 - [THYMELEAF][qtp1330981538-25] Exception processing template "product/payment.html": Exception evaluating OGNL expression: "order.getId()" (template: "product/payment.html" - line 133, col 30)
+org.thymeleaf.exceptions.TemplateProcessingException: Exception evaluating OGNL expression: "order.getId()" (template: "product/payment.html" - line 133, col 30)
+	at org.thymeleaf.standard.expression.OGNLVariableExpressionEvaluator.evaluate(OGNLVariableExpressionEvaluator.java:191)
+	at org.thymeleaf.standard.expression.OGNLVariableExpressionEvaluator.evaluate(OGNLVariableExpressionEvaluator.java:95)
+	at org.thymeleaf.standard.expression.VariableExpression.executeVariableExpression(VariableExpression.java:166)
+	at org.thymeleaf.standard.expression.SimpleExpression.executeSimple(SimpleExpression.java:66)
+	at org.thymeleaf.standard.expression.Expression.execute(Expression.java:109)
+	at org.thymeleaf.standard.expression.Expression.execute(Expression.java:138)
+	at org.thymeleaf.standard.processor.AbstractStandardExpressionAttributeTagProcessor.doProcess(AbstractStandardExpressionAttributeTagProcessor.java:144)
+	at org.thymeleaf.processor.element.AbstractAttributeTagProcessor.doProcess(AbstractAttributeTagProcessor.java:74)
+	at org.thymeleaf.processor.element.AbstractElementTagProcessor.process(AbstractElementTagProcessor.java:95)
+	at org.thymeleaf.util.ProcessorConfigurationUtils$ElementTagProcessorWrapper.process(ProcessorConfigurationUtils.java:633)
+	at org.thymeleaf.engine.ProcessorTemplateHandler.handleStandaloneElement(ProcessorTemplateHandler.java:918)
+	at org.thymeleaf.engine.StandaloneElementTag.beHandled(StandaloneElementTag.java:228)
+	at org.thymeleaf.engine.TemplateModel.process(TemplateModel.java:136)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:592)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1067)
+	at com.codecool.shop.controller.PaymentController.doGet(PaymentController.java:37)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:687)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+	at org.eclipse.jetty.servlet.ServletHolder$NotAsyncServlet.service(ServletHolder.java:1402)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:763)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1631)
+	at org.eclipse.jetty.websocket.server.WebSocketUpgradeFilter.doFilter(WebSocketUpgradeFilter.java:226)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1618)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:549)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:602)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:127)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:235)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:1610)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:233)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1369)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:188)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:489)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1580)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:186)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1284)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.handle(ContextHandlerCollection.java:191)
+	at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:146)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:127)
+	at org.eclipse.jetty.server.Server.handle(Server.java:501)
+	at org.eclipse.jetty.server.HttpChannel.lambda$handle$1(HttpChannel.java:383)
+	at org.eclipse.jetty.server.HttpChannel.dispatch(HttpChannel.java:556)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:375)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:272)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:311)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:103)
+	at org.eclipse.jetty.io.ChannelEndPoint$1.run(ChannelEndPoint.java:104)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:806)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:938)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.NullPointerException: target is null for method getId
+	at ognl.OgnlRuntime.callMethod(OgnlRuntime.java:1613)
+	at ognl.ASTMethod.getValueBody(ASTMethod.java:91)
+	at ognl.SimpleNode.evaluateGetValueBody(SimpleNode.java:212)
+	at ognl.SimpleNode.getValue(SimpleNode.java:258)
+	at ognl.ASTChain.getValueBody(ASTChain.java:141)
+	at ognl.SimpleNode.evaluateGetValueBody(SimpleNode.java:212)
+	at ognl.SimpleNode.getValue(SimpleNode.java:258)
+	at ognl.Ognl.getValue(Ognl.java:467)
+	at ognl.Ognl.getValue(Ognl.java:431)
+	at org.thymeleaf.standard.expression.OGNLVariableExpressionEvaluator.executeExpression(OGNLVariableExpressionEvaluator.java:316)
+	at org.thymeleaf.standard.expression.OGNLVariableExpressionEvaluator.evaluate(OGNLVariableExpressionEvaluator.java:170)
+	... 51 more
+2020-12-17 15:17:07 INFO  Initializer:48 - Context initialized
+2020-12-17 15:17:12 INFO  CartController:33 - Added a(n) Amazon Fire (id:1) to cart
+2020-12-17 15:17:18 INFO  CheckOutController:71 - Added a new order on id 1
+2020-12-17 15:18:17 INFO  PaymentController:58 - Failed payment(Invalid input(s))
+2020-12-17 15:19:59 INFO  Initializer:48 - Context initialized
+2020-12-17 15:21:12 INFO  CartController:33 - Added a(n) Amazon Fire (id:1) to cart
+2020-12-17 15:22:22 INFO  Initializer:48 - Context initialized
+2020-12-17 15:23:06 INFO  Initializer:48 - Context initialized
+2020-12-17 15:23:17 INFO  CartController:33 - Added a(n) Amazon Fire (id:1) to cart
+2020-12-17 15:35:33 INFO  Initializer:48 - Context initialized
+2020-12-17 15:35:42 INFO  CartController:33 - Added a(n) Amazon Fire (id:1) to cart
+2020-12-17 15:37:28 INFO  Initializer:48 - Context initialized
+2020-12-17 15:37:39 INFO  CartController:33 - Added a(n) Amazon Fire (id:1) to cart
+2020-12-17 15:37:50 INFO  CheckOutController:81 - Added a new order on id 4
+2020-12-17 15:38:30 INFO  PaymentController:58 - Failed payment(Invalid input(s))
+2020-12-17 15:39:43 INFO  CheckOutController:81 - Added a new order on id 5
+2020-12-17 15:42:25 INFO  PaymentController:58 - Failed payment(Invalid input(s))
+2020-12-17 15:44:47 INFO  CheckOutController:81 - Added a new order on id 6
+2020-12-17 15:45:25 INFO  PaymentController:58 - Failed payment(Invalid input(s))
+2020-12-17 15:47:02 INFO  Initializer:48 - Context initialized
+2020-12-17 15:47:09 INFO  CartController:33 - Added a(n) Amazon Fire (id:1) to cart
+2020-12-17 15:47:35 INFO  CheckOutController:81 - Added a new order on id 7
+2020-12-17 15:50:31 INFO  Initializer:48 - Context initialized
+2020-12-17 15:50:57 INFO  Initializer:48 - Context initialized
+2020-12-17 15:51:28 INFO  CartController:33 - Added a(n) Amazon Fire (id:1) to cart
+2020-12-17 15:51:35 INFO  CheckOutController:81 - Added a new order on id 8
+2020-12-17 15:53:40 INFO  Initializer:48 - Context initialized
+2020-12-17 15:54:29 INFO  CartController:33 - Added a(n) Amazon Fire (id:1) to cart
+2020-12-17 15:54:39 INFO  CheckOutController:81 - Added a new order on id 9
+2020-12-17 15:57:16 INFO  Initializer:48 - Context initialized
+2020-12-17 15:57:28 INFO  CartController:33 - Added a(n) Lenovo IdeaPad Miix 700 (id:2) to cart
+2020-12-17 15:57:36 INFO  CheckOutController:81 - Added a new order on id 10
+2020-12-17 15:58:08 INFO  PaymentController:58 - Failed payment(Invalid input(s))
+2020-12-17 15:58:45 INFO  PaymentController:58 - Failed payment(Invalid input(s))
+2020-12-17 15:59:13 INFO  Initializer:48 - Context initialized
+2020-12-17 15:59:22 INFO  CartController:33 - Added a(n) Amazon Fire (id:1) to cart
+2020-12-17 15:59:28 INFO  CheckOutController:81 - Added a new order on id 11
+2020-12-17 16:01:26 INFO  Initializer:48 - Context initialized
+2020-12-17 16:01:34 INFO  CartController:33 - Added a(n) Lenovo IdeaPad Miix 700 (id:2) to cart
+2020-12-17 16:01:39 INFO  CheckOutController:81 - Added a new order on id 12
+2020-12-17 16:03:58 INFO  Initializer:48 - Context initialized
+2020-12-17 16:04:04 INFO  CartController:33 - Added a(n) Amazon Fire (id:1) to cart
+2020-12-17 16:04:10 INFO  CheckOutController:81 - Added a new order on id 13
+2020-12-17 16:05:15 INFO  Initializer:48 - Context initialized
+2020-12-17 16:05:19 INFO  CartController:33 - Added a(n) Amazon Fire (id:1) to cart
+2020-12-17 16:05:27 INFO  CheckOutController:81 - Added a new order on id 14
+2020-12-17 16:07:57 INFO  Initializer:49 - Context initialized
+2020-12-17 16:08:01 INFO  CartController:33 - Added a(n) Amazon Fire (id:1) to cart
+2020-12-17 16:08:07 INFO  CheckOutController:81 - Added a new order on id 15
+2020-12-17 16:08:25 INFO  PaymentController:55 - Payment (id:1) initialized

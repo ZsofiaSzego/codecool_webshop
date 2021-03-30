@@ -2,7 +2,6 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.AddressDao;
 import com.codecool.shop.model.Address;
-import com.codecool.shop.model.Product;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -45,6 +44,22 @@ public class AddressDaoJdbc implements AddressDao {
             ResultSet resultSet = statement.executeQuery();
             if (! resultSet.next() ){ return false; }
             else{ return true; }
+        } catch (SQLException e){throw new RuntimeException(e);}
+    }
+
+    @Override
+    public int find(Address address) {
+        try (Connection connection = dataSource.getConnection()){
+            String sql = "SELECT id, country, city, zipcode, address FROM address " +
+                    "WHERE country = ? AND city = ? AND zipcode = ? AND address = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, address.getCountry());
+            statement.setString(2, address.getCity());
+            statement.setInt(3, address.getZipCode());
+            statement.setString(4, address.getAddress());
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt(1);
         } catch (SQLException e){throw new RuntimeException(e);}
     }
 
