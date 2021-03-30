@@ -28,10 +28,6 @@ public class PaymentController extends Controller{
 
     private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
 
-    public PaymentController(DataSource dataSource) {
-        super(dataSource);
-    }
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());

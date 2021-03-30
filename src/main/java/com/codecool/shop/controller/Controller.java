@@ -15,16 +15,10 @@ public class Controller extends HttpServlet {
     protected static SupplierDao supplierDataStore;
     protected static OrderDao orderDataStore;
     protected static PaymentDao paymentDataStore;
+    protected static AddressDao addressDataStore;
 
-    public Controller(DataSource dataSource) {
-        setProductDataStore(new ProductDaoJdbc(dataSource));
-        setProductCategoryDataStore(new ProductCategoryDaoJdbc(dataSource));
-        setSupplierDataStore(new SupplierDaoJdbc(dataSource));
-        //setPaymentDataStore(new PaymentDaoJdbc(dataSource));
-        //setOrderDataStore(new OrderDaoJdbc(dataSource));
+    public Controller() {
     }
-
-
 
     public static ProductDao getProductDataStore() {
         return productDataStore;
@@ -64,5 +58,13 @@ public class Controller extends HttpServlet {
 
     public static void setPaymentDataStore(PaymentDao paymentDataStore) {
         Controller.paymentDataStore = paymentDataStore;
+    }
+
+    public static AddressDao getAddressDataStore() {
+        return addressDataStore;
+    }
+
+    public static void setAddressDataStore(AddressDao addressDataStore) {
+        Controller.addressDataStore = addressDataStore;
     }
 }
