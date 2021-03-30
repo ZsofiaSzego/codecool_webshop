@@ -60,3 +60,133 @@
 {
     margin: 0 0 11px;
 }
+
+select
+{
+    border-radius: 15%;
+    border: 1px solid #428bca;
+}
+
+#filter
+{
+    cursor: pointer;
+    border-radius: 15%;
+    border: 1px solid #428bca;
+}
+
+#filter:focus
+{
+    background-color: #428bca;
+    color: white;
+}
+
+.cart_item_container, .cart_items
+{
+    display: inline;
+    font-size: 14pt;
+    alignment: center;
+}
+
+.cartbtn
+{
+background-color: #eeeeee;
+    max-height: 35px;
+    margin-inside: 1px;
+    text-align: center;
+    font-weight: normal;
+    position: center;
+    color: #428bca;
+    border-radius: 15%;
+    width: 30px;
+    border: 2px solid #428bca;
+    vertical-align: middle;
+
+}
+
+
+.delbtn
+{
+    width: fit-content;
+}
+
+p
+{
+    padding: 5px;
+}
+
+#cart
+{
+    color: #428bca;
+    alignment: right;
+    border-radius: 15%;
+    background-color: #eeeeee;
+    border: 1px solid #428bca;
+    display: inline;
+    width: fit-content;
+    height: fit-content;
+}
+
+#cart:active
+{
+    color: white;
+    background-color: #428bca;
+}
+
+#footer, .footer
+{
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: available;
+    color: white;
+    text-align: center;
+    background-color: #428bca;
+
+}
+
+#cart_num
+{
+    font-size: 1.5em;
+    padding: 0;
+    margin: 0;
+}
+
+#cart_item_container
+{
+    display: inline-flex;
+}
+
+.exp
+{
+    display:  inline-flex;
+}
+
+input
+{
+    max-height: 35px;
+}
+
+
+.sub
+{
+    background-color: #428bca;
+    color: white;
+    border-radius: 15%;
+    margin: 1%;
+}
+
+.billing, .shipping, .chkout, .pay
+{
+    display: block;
+    padding: 1%;
+}
+
+.paycard, .cardspec, .paymethod
+{
+    padding: 1%;
+}
+
+p, input
+{
+    margin: 1%;
+}

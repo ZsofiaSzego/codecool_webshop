@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Codecool Shop - Checkout</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+</head>
+<body>
+<div class="jumbotron text-center">
+    <h1>Codecool Shop - Checkout</h1>
+</div>
+    <form action="/checkout" method="post" th:if="${order != null}">
+        <div class="chkout">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" th:value="${#objects.nullSafe(order.name,'')}" required>
+            <label for="email">E-mail</label>
+            <input type="text" name="email" id="email" th:value="${#objects.nullSafe(order.email,'')}" required>
+            <label for="phone">Phone number</label>
+            <input type="text" name="phone" id="phone" th:value="${#objects.nullSafe(order.phoneNumber,'')}" required>
+        </div>
+        <div class="billing">
+            <p>Billing information</p>
+            <label for="bcountry">Country</label>
+            <input type="text" name="bcountry" id="bcountry" th:value="${#objects.nullSafe(order.billingAddress.country,'')}" required>
+            <label for="bcity">City</label>
+            <input type="text" name="bcity" id="bcity" th:value="${#objects.nullSafe(order.billingAddress.city,'')}"required>
+            <label for="baddress">Address</label>
+            <input type="text" name="baddress" id="baddress" th:value="${#objects.nullSafe(order.billingAddress.address,'')}"required>
+            <label for="bzip">Zip Code</label>
+            <input type="text" name="bzip" id="bzip" minlength="3" maxlength="5" th:value="${#objects.nullSafe(order.billingAddress.zipCode,'')}"required>
+        </div>
+        <div class="shipping">
+            <p>Shipping information</p>
+            <label for="scountry">Country</label>
+            <input type="text" name="scountry" id="scountry" th:value="${#objects.nullSafe(order.shippingAddress.country,'')}" required>
+            <label for="scity">City</label>
+            <input type="text" name="scity" id="scity" th:value="${#objects.nullSafe(order.shippingAddress.city,'')}"required>
+            <label for="saddress">Address</label>
+            <input type="text" name="saddress" id="saddress" th:value="${#objects.nullSafe(order.shippingAddress.address,'')}"required>
+            <label for="szip">Zip Code</label>
+            <input type="text" name="szip" id="szip" minlength="3" maxlength="5" th:value="${#objects.nullSafe(order.shippingAddress.zipCode,'')}"required>
+        </div>
+        <input type="submit" value="submit" class="sub">
+
+    </form>
+    <form action="/checkout" method="post" th:if="${order == null}">
+        <div class="chkout">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" required>
+            <label for="email">E-mail</label>
+            <input type="text" name="email" id="email" required>
+            <label for="phone">Phone number</label>
+            <input type="text" name="phone" id="phone" required>
+        </div>
+        <div class="billing">
+            <h2>Billing information</h2>
+            <label for="bcountry">Country</label>
+            <input type="text" name="bcountry" id="bcountry" required>
+            <label for="bcity">City</label>
+            <input type="text" name="bcity" id="bcity" required>
+            <label for="baddress">Address</label>
+            <input type="text" name="baddress" id="baddress" required>
+            <label for="bzip">Zip Code</label>
+            <input type="text" name="bzip" id="bzip" minlength="3" maxlength="5" required>
+        </div>
+        <div class="shipping">
+            <h2>Shipping information</h2>
+            <label for="scountry">Country</label>
+            <input type="text" name="scountry" id="scountry" required>
+            <label for="scity">City</label>
+            <input type="text" name="scity" id="scity" required>
+            <label for="saddress">Address</label>
+            <input type="text" name="saddress" id="saddress" required>
+            <label for="szip">Zip Code</label>
+            <input type="text" name="szip" id="szip" minlength="3" maxlength="5" required>
+        </div>
+        <input type="submit" value="submit" class="sub">
+    </form>
+
+<div class="footer" >
+    <div class="card-body footer">
+        &copy; 2020 Codecool Budapest
+    </div>
+</div></body>
+</html>

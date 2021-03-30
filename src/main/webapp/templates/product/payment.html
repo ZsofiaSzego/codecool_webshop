@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+
+</head>
+<body>
+
+<div class="jumbotron text-center">
+    <h1>Codecool Shop - Payment</h1>
+</div>
+<form method="post" action="/payment" class="form" th:if="${payment != null}">
+    <!--    <label>Total Price:</label>-->
+    <div class="paymethod">
+        <h2>Payment method: </h2>
+        <label for="creditcard">Credit card </label>
+        <input type="radio" name="radiobtn" id="creditcard" value="credit"
+               th:value="${#objects.nullSafe(payment.cardType,'')}">
+        <label for="paypal">Paypal </label>
+        <input type="radio" name="radiobtn" id="paypal" value="paypal"
+               th:value="${#objects.nullSafe(payment.cardType,'')}"><br>
+    </div>
+    <div class="paycard">
+        <h2>Card information </h2>
+        <label for="cardnumber">Card number </label>
+        <input type="text" id="cardnumber" name="cardnumber" required
+               th:value="${#objects.nullSafe(payment.cardNumber,'')}"><br>
+        <label for="cardholder">Card holder </label>
+        <input type="text" id="cardholder" name="cardholder" required
+               th:value="${#objects.nullSafe(payment.cardHolder,'')}"><br>
+        <div class="exp">
+            <label>Expiry date</label>
+            <input type="text" id="expm" name="expm" size="2" maxlength="2" required
+                   th:value="${#objects.nullSafe(payment.expMonth,'')}">
+            <p> / </p>
+            <input type="text" id="expyear" name="expyear" size="2" maxlength="2" required
+                   th:value="${#objects.nullSafe(payment.expYear,'')}">
+        </div>
+    </div>
+    <div class="cardspec">
+        <!--    only if credit card-->
+        <div class="creditcard">
+            <h2>Credit card:</h2>
+            <label for="code">Code</label>
+            <input type="password" id="code" name="code" maxlength="3" size="3"
+                   th:value="${#objects.nullSafe(payment.creditCardCode,'')}">
+        </div>
+
+        <!--    only if paypal-->
+        <div class="paypal">
+            <h2>Paypal:</h2>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" th:value="${#objects.nullSafe(payment.payPalUserName,'')}"><br>
+            <label for="password">Passwsord</label>
+            <input type="password" id="password" name="password"
+                   th:value="${#objects.nullSafe(payment.payPalPassword,'')}">
+        </div>
+    </div>
+
+    <input type="submit" value="submit" class="sub">
+</form>
+
+<form method="post" action="/payment" class="form" th:if="${payment == null}">
+    <!--    <label >Total Price:</label>-->
+    <!--    <p></p>-->
+    <div class="paymethod">
+        <h2>Payment method: </h2>
+        <label for="creditcard">Credit card </label>
+        <input type="radio" name="radiobtn" id="creditcard" value="credit">
+        <label for="paypal">Paypal </label>
+        <input type="radio" name="radiobtn" id="paypal" value="paypal"><br>
+    </div>
+    <div class="paycard">
+        <h2>Card information </h2>
+        <label for="cardnumber">Card number </label>
+        <input type="text" id="cardnumber" name="cardnumber" required><br>
+        <label for="cardholder">Card holder </label>
+        <input type="text" id="cardholder" name="cardholder" required><br>
+        <div class="exp">
+            <label>Expiry date</label>
+            <input type="text" id="expm" name="expm" size="2" maxlength="2" required>
+            <p> / </p>
+            <input type="text" id="expyear" name="expyear" size="2" maxlength="2" required>
+        </div>
+    </div>
+    <div class="cardspec">
+
+        <!--    only if credit card-->
+        <div class="creditcard">
+            <h2>Credit card:</h2>
+            <label for="code">Code</label>
+            <input type="text" id="code" name="code" maxlength="3" size="3">
+        </div>
+
+        <!--    only if paypal-->
+        <div class="paypal">
+            <h2>Paypal:</h2>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username"><br>
+            <label for="password">Passwsord</label>
+            <input type="password" id="password" name="password">
+        </div>
+
+    </div>
+
+    <input type="submit" value="submit" class="sub">
+</form>
+
+<div class="footer">
+    <div class="card-body footer">
+        &copy; 2020 Codecool Budapest
+    </div>
+</div>
+</body>
+</html>
